@@ -1,0 +1,145 @@
+@mixin breakpoint($size) {
+  $desktop: "min-width: 1024px";
+  $tablet: "max-width: 1023px";
+  $phone: "max-width: 767px";
+
+  @if $size ==desktop {
+    @media only screen and (#{$desktop}) {
+      @content;
+    }
+  }
+
+  @else if $size ==tablet {
+    @media only screen and (#{$tablet}) {
+      @content;
+    }
+  }
+
+  @else if $size ==phone {
+    @media only screen and (#{$phone}) {
+      @content;
+    }
+  }
+
+  @else {
+    @media only screen and (#{$size}) {
+      @content;
+    }
+  }
+}
+
+.pos-relative {
+  position: relative;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.height-100 {
+  height: 100%;
+
+  >img {
+    height: 100%;
+  }
+}
+
+.width-100 {
+  width: 100%;
+
+  >img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.flex-fill {
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.object-fit-cover {
+  img {
+    object-fit: cover;
+  }
+
+  &.cover-width-fill {
+    img {
+      width: 100% !important;
+    }
+  }
+
+  &.cover-height-fill {
+    img {
+      width: 100% !important;
+    }
+  }
+}
+
+.vh100-header-accounted {
+  min-height: calc(100vh - 74px);
+}
+
+.wrap-1200 {
+  @media (max-width: 1200px) {
+    flex-direction: column;
+  }
+}
+
+.max-height-img-80vh {
+  >img {
+    max-height: 80vh;
+    object-fit: cover;
+  }
+}
+
+.max-height-img-50vh {
+  >img {
+    max-height: 50vh;
+    object-fit: cover;
+  }
+}
+
+.min-height-75vh {
+  img {
+    min-height: 70vh;
+    object-fit: cover;
+  }
+}
+
+.height-auto-mobile {
+  @media (max-width: 600px) {
+    height: auto !important;
+
+    >img {
+      height: auto !important;
+    }
+  }
+}
+
+.column-reverse-mobile {
+  @media (max-width: 781px) {
+    flex-direction: column-reverse;
+  }
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+
+  &.space-between {
+    justify-content: space-between;
+  }
+}
+
+.query-last-post-margin-0 {
+  .wp-block-post:last-of-type>* {
+    margin-bottom: 0 !important;
+  }
+}
+
+.h2-link-flex-line-height {
+  a {
+    line-height: clamp(2.188rem, 0.781rem + 3.75vw, 3.125rem);
+  }
+}

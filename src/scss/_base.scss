@@ -1,0 +1,55 @@
+@use 'utilities' as *;
+
+:root {
+  // Sets "normal" font size for catch-all. Same as "Small" font size
+  --wp--preset--font-size--normal: clamp(0.875rem, 0.8047rem + 0.3125vw, 1rem);
+}
+
+* {
+  box-sizing: border-box !important;
+  line-height: 1.6;
+}
+
+html {
+  position: relative;
+  overflow-x: clip;
+}
+
+body {
+  overflow-x: clip;
+}
+
+a:where(:not(.wp-element-button)) {
+  transition: 0.2s color;
+}
+
+// Highlight colour
+
+*::selection {
+  background-color: #9c9288;
+  color: white;
+}
+
+// Custom Scroll Bar
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(#2d2d2c, 0.4);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(#2d2d2c, 0.6);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(#2d2d2c, 0.4);
+}
+
+html body {
+  .entry-content {
+    margin-top: 0;
+  }
+}
