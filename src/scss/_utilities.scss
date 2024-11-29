@@ -143,3 +143,8 @@
     line-height: clamp(2.188rem, 0.781rem + 3.75vw, 3.125rem);
   }
 }
+
+.fade-up {
+  transform: translateY(100%);
+  visibility: hidden;
+}

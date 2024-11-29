@@ -166,3 +166,21 @@ add_action('admin_head', 'my_custom_favicon');
 // }
 
 // add_action('init', 'playsthatwork_register_block_styles');
+
+// Noscript for when JS is disabled
+
+function noscript_fallback()
+{
+?>
+  <noscript>
+    <style>
+      html body .fade-up {
+        visibility: visible;
+        transform: translateY(0);
+      }
+    </style>
+  </noscript>
+<?php
+}
+
+add_action('wp_head', 'noscript_fallback');

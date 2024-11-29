@@ -73,22 +73,15 @@ document.addEventListener("DOMContentLoaded", function () {
         // Basic fade up
 
         gsap.utils.toArray(".fade-up").forEach((element) => {
-          gsap.fromTo(
-            element,
-            {
-              y: 50,
-              opacity: 0,
+          gsap.to(element, {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.5,
+            scrollTrigger: {
+              trigger: element,
+              start: "top 85%",
             },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.5,
-              scrollTrigger: {
-                trigger: element,
-                start: "top 85%",
-              },
-            }
-          );
+          });
         });
 
         // Logo swipe

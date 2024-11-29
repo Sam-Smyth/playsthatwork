@@ -167,6 +167,11 @@
           "slug": "paragraph"
         },
         {
+          "name": "Paragraph Large",
+          "size": "clamp(1.125rem, 1rem + 0.333vw, 1.25rem)",
+          "slug": "paragraph-large"
+        },
+        {
           "name": "Small",
           "size": "clamp(1rem, 0.875rem + 0.333vw, 1.125rem)",
           "slug": "small"
