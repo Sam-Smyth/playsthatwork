@@ -2,6 +2,38 @@
 
 html body {
 
+  .logo-link {
+    font-size: 0;
+  }
+
+  .site-logo {
+    max-width: 169px;
+    width: 100%;
+  }
+
+  .custom-nav {
+    .wp-block-navigation-item {
+      &:last-child {
+        .wp-block-navigation-item__content {
+          border-bottom: 2px solid var(--wp--preset--color--accent);
+  
+          &:hover {
+            border-bottom: 2px solid var(--wp--preset--color--contrast);
+          }
+        }
+      }
+    }
+  
+    .wp-block-navigation-item__content {
+      border-bottom: 2px solid transparent;
+      transition: 0.2s border-bottom;
+  
+      &:hover {
+        border-bottom: 2px solid var(--wp--preset--color--accent);
+      }
+    }
+  }
+
   // Buttons
 
   .wp-block-button {

@@ -42,7 +42,7 @@
       "text": true
     },
     "layout": {
-      "contentSize": "1340px",
+      "contentSize": "1240px",
       "wideSize": "1600px"
     },
     "spacing": {
@@ -324,7 +324,7 @@
       }
     },
     "color": {
-      "background": "var(--wp--preset--color--white)",
+      "background": "var(--wp--preset--color--base)",
       "text": "var(--wp--preset--color--contrast)"
     },
     "typography": {

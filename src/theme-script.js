@@ -91,8 +91,32 @@ document.addEventListener("DOMContentLoaded", function () {
           );
         });
 
+        // Logo swipe
+
+        const logos = gsap.utils.toArray(".site-logo");
+
+        logos.forEach((logo, index) => {
+          // Update gradient ID to be unique
+          const gradient = logo.querySelector("linearGradient");
+          const uniqueId = `shimmer-${index}`;
+          gradient.id = uniqueId;
+
+          // Update the path to reference the new unique gradient
+          const path = logo.querySelector("path");
+          path.setAttribute("fill", `url(#${uniqueId})`);
+
+          const tl = gsap.timeline({ paused: true });
+
+          // Animate gradient points
+          tl.to(gradient, {
+            attr: { x1: 1, x2: 2 },
+          });
+
+          logo.addEventListener("mouseenter", () => tl.play());
+          logo.addEventListener("mouseleave", () => tl.reverse());
+        });
+
         if (isDesktop) {
-          
         }
       },
       false

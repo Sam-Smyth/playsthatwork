@@ -2,7 +2,7 @@
 
 :root {
   // Sets "normal" font size for catch-all. Same as "Small" font size
-  --wp--preset--font-size--normal: clamp(0.875rem, 0.8047rem + 0.3125vw, 1rem);
+  --wp--preset--font-size--normal: clamp(1rem, 0.875rem + 0.333vw, 1.125rem);
 }
 
 * {
