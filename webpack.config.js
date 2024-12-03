@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const RemovePlugin = require("remove-files-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === "production";
@@ -10,7 +11,7 @@ module.exports = (env, argv) => {
 
   return {
     entry: {
-      main: "./src/theme-script.js",
+      main: "./src/js/theme-script.js",
       styles: "./src/style.scss",
       "style-editor": "./src/style-editor.scss",
     },
@@ -60,6 +61,9 @@ module.exports = (env, argv) => {
             path.join(outputDir, "style-editor.js"),
           ],
         },
+      }),
+      new CopyPlugin({
+        patterns: [{ from: "src/js/SplitText.min.js", to: "SplitText.min.js" }],
       }),
     ],
     devtool: isProduction ? false : "inline-source-map",

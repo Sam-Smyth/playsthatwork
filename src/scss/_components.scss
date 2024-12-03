@@ -1,6 +1,6 @@
 @use 'utilities' as *;
 
-html body {
+div.wp-site-blocks {
 
   .logo-link {
     font-size: 0;
@@ -136,6 +136,8 @@ html body {
 
   .home-hero-h1 {
     line-height: 1.4;
+    visibility: hidden;
+
 
     mark {
       line-height: inherit;
@@ -143,7 +145,8 @@ html body {
   }
 
   .home-hero {
-    padding-top: calc(113.55px + var(--wp--preset--spacing--flex-large)) !important;
+    padding-top: calc(113.55px + var(--wp--preset--spacing--flex-large));
+    padding-bottom: calc(20vw - 1rem);
 
     .wp-block-cover__background {
       background: linear-gradient(to right, var(--wp--preset--color--base) 50%, rgba(237, 252, 252, 0.7) 60%);
@@ -156,5 +159,32 @@ html body {
     }
   }
 
+  .green-flow-section {
+    overflow: visible;
+    margin-block: calc(15vw - 1rem);
+
+    .home & {
+      margin-block-start: 0;
+    }
+
+    .top-curve,
+    .bottom-curve {
+      max-width: none;
+      position: absolute;
+      margin-right: calc(var(--wp--style--root--padding-right)* -1) !important;
+      margin-left: calc(var(--wp--style--root--padding-left)* -1) !important;
+      fill: var(--wp--preset--color--contrast) !important;
+    }
+
+    .top-curve {
+      top: 0;
+      transform: translateY(-99%);
+    }
+
+    .bottom-curve {
+      bottom: 0;
+      transform: translateY(99%);
+    }
+  }
 
 }

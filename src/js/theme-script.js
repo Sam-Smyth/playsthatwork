@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // GSAP
 
     gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(SplitText);
 
     let mm = gsap.matchMedia();
 
@@ -107,6 +108,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
           logo.addEventListener("mouseenter", () => tl.play());
           logo.addEventListener("mouseleave", () => tl.reverse());
+        });
+
+        // Home hero split text
+
+        const homeHero = document.querySelector(".home-hero-h1");
+        const heroSplit = new SplitText(homeHero, { type: "words" });
+
+        homeHero.style.visibility = "visible";
+
+        gsap.from(heroSplit.words, {
+          y: 50,
+          autoAlpha: 0,
+          stagger: 0.05,
+        });
+
+        // Green cover section wave
+
+        const topCurve = document.querySelector(".top-curve path");
+        const topCurveTl = gsap.timeline({ repeat: -1, yoyo: true });
+
+        topCurveTl.to(topCurve, {
+          attr: {
+            d: "M0 250 0 20C626 368 795-125 1438 121L1440 250Z",
+          },
+          duration: 15,
+          ease: "sine.inOut",
         });
 
         if (isDesktop) {
