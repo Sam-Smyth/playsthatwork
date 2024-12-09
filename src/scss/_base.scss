@@ -26,8 +26,8 @@ a:where(:not(.wp-element-button)) {
 // Highlight colour
 
 *::selection {
-  background-color: #9c9288;
-  color: white;
+  background-color: #f4a259;
+  color: #31493c;
 }
 
 // Custom Scroll Bar
@@ -37,15 +37,15 @@ a:where(:not(.wp-element-button)) {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(#2d2d2c, 0.4);
+  background: rgba(#31493c, 0.4);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(#2d2d2c, 0.6);
+  background: rgba(#31493c, 0.6);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(#2d2d2c, 0.4);
+  background: rgba(#31493c, 0.4);
 }
 
 html body {

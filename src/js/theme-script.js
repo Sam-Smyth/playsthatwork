@@ -136,6 +136,58 @@ document.addEventListener("DOMContentLoaded", function () {
           ease: "sine.inOut",
         });
 
+        const bottomCurve = document.querySelector(".bottom-curve path");
+        const bottomCurveTl = gsap.timeline({ repeat: -1, yoyo: true });
+
+        bottomCurveTl.to(bottomCurve, {
+          attr: {
+            d: "M0 0V92C360 202 1083 202 1440 92V0",
+          },
+          duration: 10,
+          ease: "sine.inOut",
+        });
+
+        // Logo slider
+
+        const track = document.querySelector(".logo-slide");
+        const iconLogos = gsap.utils.toArray(".logo");
+
+        if (track) {
+          // Clone logos
+          iconLogos.forEach((logo) => {
+            track.appendChild(logo.cloneNode(true));
+          });
+
+          const baseSpeed = 10;
+
+          const anim = gsap.to(".logo-slide", {
+            x: "-100%",
+            duration: baseSpeed,
+            ease: "none",
+            repeat: -1,
+          });
+
+          // Handle arrow hovers
+          const leftArrow = document.querySelector(".left-arrow");
+          const rightArrow = document.querySelector(".right-arrow");
+
+          leftArrow.addEventListener("mouseenter", () => {
+            gsap.to(anim, { timeScale: -2, duration: 0.3 });
+          });
+
+          leftArrow.addEventListener("mouseleave", () => {
+            gsap.to(anim, { timeScale: 1, duration: 0.3 });
+          });
+
+          rightArrow.addEventListener("mouseenter", () => {
+            gsap.to(anim, { timeScale: 2, duration: 0.3 });
+          });
+
+          rightArrow.addEventListener("mouseleave", () => {
+            gsap.to(anim, { timeScale: 1, duration: 0.3 });
+          });
+        }
+
         if (isDesktop) {
         }
       },

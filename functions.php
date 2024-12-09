@@ -103,13 +103,13 @@ function wpb_stop_update_emails($send, $type, $core_update, $result)
 
 // Register all ACF blocks
 
-// add_action('init', 'register_acf_blocks');
-// function register_acf_blocks()
-// {
-//   foreach (glob(get_stylesheet_directory() . '/blocks/*/') as $path) {
-//     register_block_type($path . 'block.json');
-//   }
-// }
+add_action('init', 'register_acf_blocks');
+function register_acf_blocks()
+{
+  foreach (glob(get_stylesheet_directory() . '/blocks/*/') as $path) {
+    register_block_type($path . 'block.json');
+  }
+}
 
 // Allow SVG uploads
 
