@@ -153,6 +153,17 @@ document.addEventListener("DOMContentLoaded", function () {
         const iconLogos = gsap.utils.toArray(".logo");
 
         if (track) {
+          // Measure total width of logos plus one extra gap to create a seamless loop
+          const trackStyles = window.getComputedStyle(track);
+          const trackStylesGap = parseFloat(trackStyles.gap);
+
+          const firstLogo = iconLogos[0];
+          const lastLogo = iconLogos[iconLogos.length - 1];
+          const totalWidth =
+            lastLogo.getBoundingClientRect().right -
+            firstLogo.getBoundingClientRect().left +
+            trackStylesGap; // Add one more gap to account for last logo of original set to first logo of cloned set
+
           // Clone logos
           iconLogos.forEach((logo) => {
             track.appendChild(logo.cloneNode(true));
@@ -160,33 +171,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
           const baseSpeed = 10;
 
-          const anim = gsap.to(".logo-slide", {
-            x: "-100%",
+          const anim = gsap.to(track, {
+            x: -totalWidth,
             duration: baseSpeed,
             ease: "none",
             repeat: -1,
           });
 
           // Handle arrow hovers
-          const leftArrow = document.querySelector(".left-arrow");
-          const rightArrow = document.querySelector(".right-arrow");
+          const leftArrow = document.querySelector(".logo-left-arrow");
+          const rightArrow = document.querySelector(".logo-right-arrow");
 
-          leftArrow.addEventListener("mouseenter", () => {
-            gsap.to(anim, { timeScale: -2, duration: 0.3 });
-          });
+          function handleArrowHover(arrow, speed) {
+            arrow.addEventListener("mouseenter", () =>
+              gsap.to(anim, { timeScale: speed, duration: 0.3 })
+            );
+            arrow.addEventListener("mouseleave", () =>
+              gsap.to(anim, { timeScale: 1, duration: 0.3 })
+            );
+          }
 
-          leftArrow.addEventListener("mouseleave", () => {
-            gsap.to(anim, { timeScale: 1, duration: 0.3 });
-          });
-
-          rightArrow.addEventListener("mouseenter", () => {
-            gsap.to(anim, { timeScale: 2, duration: 0.3 });
-          });
-
-          rightArrow.addEventListener("mouseleave", () => {
-            gsap.to(anim, { timeScale: 1, duration: 0.3 });
-          });
+          handleArrowHover(leftArrow, -2);
+          handleArrowHover(rightArrow, 2);
         }
+
 
         if (isDesktop) {
         }

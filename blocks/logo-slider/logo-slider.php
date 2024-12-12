@@ -1,5 +1,5 @@
-<div class="logo-slider-container">
-  <button class="nav-arrow left-arrow">&lt;</button>
+<div <?php echo get_block_wrapper_attributes(['class' => 'logo-slider-container']) ?>>
+  <button class="logo-nav-arrow logo-left-arrow">&lt;</button>
 
   <div class="logo-track">
     <div class="logo-slide">
@@ -15,5 +15,5 @@
     </div>
   </div>
 
-  <button class="nav-arrow right-arrow">&gt;</button>
+  <button class="logo-nav-arrow logo-right-arrow">&gt;</button>
 </div>
