@@ -160,8 +160,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const widthToDurationRatio = 175;
       const duration = totalWidth / widthToDurationRatio;
 
-      console.log(duration);
-
       const anim = gsap.to(track, {
         x: -totalWidth,
         duration: duration,
@@ -217,5 +215,35 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       false
     );
+
+    // Swiper - blog
+
+    if (document.querySelectorAll(".blog-swiper")) {
+      var swiper = new Swiper(".blog-swiper", {
+        spaceBetween: 80,
+        grabCursor: true,
+        touchEventsTarget: "container",
+        pagination: {
+          el: ".swiper-pagination",
+          type: "fraction",
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 40,
+          },
+          1000: {
+            slidesPerView: 2,
+          },
+        },
+      });
+    }
   });
 });
