@@ -28,6 +28,11 @@
   font-size: 20px;
   font-weight: 700;
   color: var(--wp--preset--color--contrast);
+  transition: font-size 0.2s;
+}
+
+.logo-nav-arrow:hover {
+  font-size: 24px;
 }
 
 .logo-left-arrow {

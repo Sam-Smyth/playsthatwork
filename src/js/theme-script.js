@@ -59,6 +59,135 @@ document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollTrigger);
     gsap.registerPlugin(SplitText);
 
+    // Basic fade up
+
+    gsap.utils.toArray(".fade-up").forEach((element) => {
+      gsap.to(element, {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: element,
+          start: "top 85%",
+        },
+      });
+    });
+
+    // Logo swipe
+
+    const logos = gsap.utils.toArray(".site-logo");
+
+    logos.forEach((logo, index) => {
+      // Update gradient ID to be unique
+      const gradient = logo.querySelector("linearGradient");
+      const uniqueId = `shimmer-${index}`;
+      gradient.id = uniqueId;
+
+      // Update the path to reference the new unique gradient
+      const path = logo.querySelector("path");
+      path.setAttribute("fill", `url(#${uniqueId})`);
+
+      const tl = gsap.timeline({ paused: true });
+
+      // Animate gradient points
+      tl.to(gradient, {
+        attr: { x1: 1, x2: 2 },
+      });
+
+      logo.addEventListener("mouseenter", () => tl.play());
+      logo.addEventListener("mouseleave", () => tl.reverse());
+    });
+
+    // Home hero split text
+
+    const homeHero = document.querySelector(".home-hero-h1");
+    const heroSplit = new SplitText(homeHero, { type: "words" });
+
+    homeHero.style.visibility = "visible";
+
+    gsap.from(heroSplit.words, {
+      y: 50,
+      autoAlpha: 0,
+      stagger: 0.05,
+    });
+
+    // Green cover section wave
+
+    const topCurve = document.querySelector(".top-curve path");
+    const topCurveTl = gsap.timeline({ repeat: -1, yoyo: true });
+
+    topCurveTl.to(topCurve, {
+      attr: {
+        d: "M0 250 0 20C626 368 795-125 1438 121L1440 250Z",
+      },
+      duration: 15,
+      ease: "sine.inOut",
+    });
+
+    const bottomCurve = document.querySelector(".bottom-curve path");
+    const bottomCurveTl = gsap.timeline({ repeat: -1, yoyo: true });
+
+    bottomCurveTl.to(bottomCurve, {
+      attr: {
+        d: "M0 0V92C360 202 1083 202 1440 92V0",
+      },
+      duration: 10,
+      ease: "sine.inOut",
+    });
+
+    // Logo slider
+
+    const track = document.querySelector(".logo-slide");
+    const iconLogos = gsap.utils.toArray(".logo");
+
+    if (track) {
+      // Measure total width of logos plus one extra gap to create a seamless loop
+      const trackStyles = window.getComputedStyle(track);
+      const trackStylesGap = parseFloat(trackStyles.gap);
+
+      const firstLogo = iconLogos[0];
+      const lastLogo = iconLogos[iconLogos.length - 1];
+      const totalWidth =
+        lastLogo.getBoundingClientRect().right -
+        firstLogo.getBoundingClientRect().left +
+        trackStylesGap; // Add one more gap to account for last logo of original set to first logo of cloned set
+
+      // Clone logos
+      iconLogos.forEach((logo) => {
+        track.appendChild(logo.cloneNode(true));
+      });
+
+      const widthToDurationRatio = 175;
+      const duration = totalWidth / widthToDurationRatio;
+
+      console.log(duration);
+
+      const anim = gsap.to(track, {
+        x: -totalWidth,
+        duration: duration,
+        ease: "none",
+        repeat: -1,
+      });
+
+      // Handle arrow hovers
+      const leftArrow = document.querySelector(".logo-left-arrow");
+      const rightArrow = document.querySelector(".logo-right-arrow");
+
+      function handleArrowHover(arrow, speed) {
+        arrow.addEventListener("mouseenter", () =>
+          gsap.to(anim, { timeScale: speed, duration: 0.3 })
+        );
+        arrow.addEventListener("mouseleave", () =>
+          gsap.to(anim, { timeScale: 1, duration: 0.3 })
+        );
+      }
+
+      handleArrowHover(leftArrow, -3);
+      handleArrowHover(rightArrow, 3);
+    }
+
+    // Responsive matchMedia
+
     let mm = gsap.matchMedia();
 
     mm.add(
@@ -69,134 +198,21 @@ document.addEventListener("DOMContentLoaded", function () {
       (context) => {
         let { isMobile, isDesktop } = context.conditions;
 
-        // ALL TWEENS
-
-        // Basic fade up
-
-        gsap.utils.toArray(".fade-up").forEach((element) => {
-          gsap.to(element, {
-            y: 0,
-            autoAlpha: 1,
-            duration: 0.5,
-            scrollTrigger: {
-              trigger: element,
-              start: "top 85%",
-            },
-          });
-        });
-
-        // Logo swipe
-
-        const logos = gsap.utils.toArray(".site-logo");
-
-        logos.forEach((logo, index) => {
-          // Update gradient ID to be unique
-          const gradient = logo.querySelector("linearGradient");
-          const uniqueId = `shimmer-${index}`;
-          gradient.id = uniqueId;
-
-          // Update the path to reference the new unique gradient
-          const path = logo.querySelector("path");
-          path.setAttribute("fill", `url(#${uniqueId})`);
-
-          const tl = gsap.timeline({ paused: true });
-
-          // Animate gradient points
-          tl.to(gradient, {
-            attr: { x1: 1, x2: 2 },
-          });
-
-          logo.addEventListener("mouseenter", () => tl.play());
-          logo.addEventListener("mouseleave", () => tl.reverse());
-        });
-
-        // Home hero split text
-
-        const homeHero = document.querySelector(".home-hero-h1");
-        const heroSplit = new SplitText(homeHero, { type: "words" });
-
-        homeHero.style.visibility = "visible";
-
-        gsap.from(heroSplit.words, {
-          y: 50,
-          autoAlpha: 0,
-          stagger: 0.05,
-        });
-
-        // Green cover section wave
-
-        const topCurve = document.querySelector(".top-curve path");
-        const topCurveTl = gsap.timeline({ repeat: -1, yoyo: true });
-
-        topCurveTl.to(topCurve, {
-          attr: {
-            d: "M0 250 0 20C626 368 795-125 1438 121L1440 250Z",
-          },
-          duration: 15,
-          ease: "sine.inOut",
-        });
-
-        const bottomCurve = document.querySelector(".bottom-curve path");
-        const bottomCurveTl = gsap.timeline({ repeat: -1, yoyo: true });
-
-        bottomCurveTl.to(bottomCurve, {
-          attr: {
-            d: "M0 0V92C360 202 1083 202 1440 92V0",
-          },
-          duration: 10,
-          ease: "sine.inOut",
-        });
-
-        // Logo slider
-
-        const track = document.querySelector(".logo-slide");
-        const iconLogos = gsap.utils.toArray(".logo");
-
-        if (track) {
-          // Measure total width of logos plus one extra gap to create a seamless loop
-          const trackStyles = window.getComputedStyle(track);
-          const trackStylesGap = parseFloat(trackStyles.gap);
-
-          const firstLogo = iconLogos[0];
-          const lastLogo = iconLogos[iconLogos.length - 1];
-          const totalWidth =
-            lastLogo.getBoundingClientRect().right -
-            firstLogo.getBoundingClientRect().left +
-            trackStylesGap; // Add one more gap to account for last logo of original set to first logo of cloned set
-
-          // Clone logos
-          iconLogos.forEach((logo) => {
-            track.appendChild(logo.cloneNode(true));
-          });
-
-          const baseSpeed = 10;
-
-          const anim = gsap.to(track, {
-            x: -totalWidth,
-            duration: baseSpeed,
-            ease: "none",
-            repeat: -1,
-          });
-
-          // Handle arrow hovers
-          const leftArrow = document.querySelector(".logo-left-arrow");
-          const rightArrow = document.querySelector(".logo-right-arrow");
-
-          function handleArrowHover(arrow, speed) {
-            arrow.addEventListener("mouseenter", () =>
-              gsap.to(anim, { timeScale: speed, duration: 0.3 })
-            );
-            arrow.addEventListener("mouseleave", () =>
-              gsap.to(anim, { timeScale: 1, duration: 0.3 })
-            );
-          }
-
-          handleArrowHover(leftArrow, -2);
-          handleArrowHover(rightArrow, 2);
-        }
-
-
         if (isDesktop) {
+          const buttons = gsap.utils.toArray(
+            ".wp-block-button__link.wp-element-button"
+          );
+
+          buttons.forEach((button) => {
+            const hover = gsap.to(button, {
+              "--button-circle-stop": "100%",
+              duration: 0.25,
+              paused: true,
+            });
+
+            button.addEventListener("mouseenter", () => hover.play());
+            button.addEventListener("mouseleave", () => hover.reverse());
+          });
         }
       },
       false

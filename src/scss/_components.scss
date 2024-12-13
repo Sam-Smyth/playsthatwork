@@ -40,9 +40,21 @@ div.wp-site-blocks {
     .wp-block-button__link.wp-element-button {
       transition: color 0.2s, background-color 0.2s, border-color 0.2s;
 
+      --button-circle-stop: 0%;
+
+      background: radial-gradient(circle at center,
+        var(--wp--preset--color--accent) 0%, 
+        var(--wp--preset--color--accent) var(--button-circle-stop), 
+        transparent var(--button-circle-stop),);
+
       display: flex;
       gap: 5px;
       align-items: center;
+
+      // &:hover {
+      //   --button-circle-stop: 100%;
+      //   // color: var(--wp--preset--color--base);
+      // }
 
       &:after {
         content: '';
@@ -59,25 +71,10 @@ div.wp-site-blocks {
     // }
 
     // OUTLINE BUTTON
-    &.is-style-outline {
-      &:hover {
-        .wp-block-button__link.wp-element-button {
-          background-color: var(--wp--preset--color--accent);
-        }
-      }
-    }
-
-    // WHITE BUTTON
-    // &.white-btn {
-    //   .wp-block-button__link.wp-element-button {
-    //     color: var(--wp--preset--color--white);
-    //     border-color: var(--wp--preset--color--white);
-    //   }
-
+    // &.is-style-outline {
     //   &:hover {
     //     .wp-block-button__link.wp-element-button {
-    //       border-color: var(--wp--preset--color--accent);
-    //       color: var(--wp--preset--color--accent);
+    //       background-color: var(--wp--preset--color--accent);
     //     }
     //   }
     // }
@@ -134,6 +131,16 @@ div.wp-site-blocks {
     }
   }
 
+  // Cover button dark hover
+
+  :where(.wp-block-cover:not(.has-text-color)) {
+    .is-style-outline {
+      &:hover {
+        color: var(--wp--preset--color--contrast);
+      }
+    }
+  }
+
   .home-hero-h1 {
     line-height: 1.4;
     visibility: hidden;
@@ -171,6 +178,7 @@ div.wp-site-blocks {
     .bottom-curve {
       max-width: none;
       position: absolute;
+      z-index: -1;
       margin-right: calc(var(--wp--style--root--padding-right)* -1) !important;
       margin-left: calc(var(--wp--style--root--padding-left)* -1) !important;
       fill: var(--wp--preset--color--contrast) !important;
