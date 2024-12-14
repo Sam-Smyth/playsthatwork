@@ -184,6 +184,8 @@ document.addEventListener("DOMContentLoaded", function () {
       handleArrowHover(rightArrow, 3);
     }
 
+    // About us blob
+
     gsap
       .timeline({
         scrollTrigger: {
@@ -198,9 +200,13 @@ document.addEventListener("DOMContentLoaded", function () {
         duration: 2,
         ease: "elastic.out(0.75,0.5)",
       })
-      .from(".about-us-blob-exclusion", {
-        opacity: 0,
-      }, ">-1")
+      .from(
+        ".about-us-blob-exclusion",
+        {
+          opacity: 0,
+        },
+        ">-1"
+      )
       .to(".about-us-blob", {
         attr: {
           d: "M 615.3 123.7 C 702.837 150.705 683.529 261.725 660.084 348.61 C 624.227 485.143 657.326 618.229 518.034 661.672 c -133.517 34.168 -217.729 -19.594 -290.823 -57.52 S 22.526 513.063 0.8 434 c -28.46 -150.352 149.007 -170.206 189.002 -266.745 C 218.764 101.746 237.666 9.852 359.4 2.7 c 118.4 -5.299 115.192 76.98 255.9 121 Z",
@@ -210,6 +216,18 @@ document.addEventListener("DOMContentLoaded", function () {
         ease: "sine.inOut",
         yoyo: true,
       });
+
+    // Contact blob
+
+    gsap.to(".contact-blob path", {
+      attr: {
+        d: "M626 134.4c45.616 53.113 58.377 66.892 72.689 145.667 9.362 55.284-6.919 121.239-58.461 192.578-58.255 75.997-92.04 110.91-212.026 109.146-88.225-3.529-192.33-29.997-275.261-84.696C57.658 432.691 4.9 375.1.2 306.8-4 239.2 55.1 167.7 134.016 99.177 230.305 27.648 316.594 5.409 406.253 10.722c91.4 7 160.201 57.442 219.747 123.678Z",
+      },
+      duration: 5,
+      repeat: -1,
+      ease: "sine.inOut",
+      yoyo: true,
+    });
 
     // Responsive matchMedia
 

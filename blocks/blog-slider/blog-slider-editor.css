@@ -1,83 +1,17 @@
 .swiper-container.blog-swiper {
   cursor: grab;
 }
+
+.swiper-container.blog-swiper .swiper-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 .swiper-container.blog-swiper .swiper-slide {
-  flex-direction: column;
-  height: auto;
-  padding: 100px 5%;
-  border: 1px solid var(--wp--preset--color--tertiary);
-  cursor: grab;
+  flex-basis: calc(50% - 20px);
 }
-@media only screen and (max-width: 767px) {
-  .swiper-container.blog-swiper .swiper-slide {
-    padding: 50px 10%;
-  }
-}
-.swiper-container.blog-swiper .swiper-slide h3 {
-  font-size: var(--wp--preset--font-size--medium);
-  font-weight: 600;
-  margin-top: 0;
-  line-height: 1.3;
-}
-.swiper-container.blog-swiper .swiper-slide p {
-  margin-top: var(--wp--style--block-gap);
-}
-.swiper-container.blog-swiper .swiper-slide .wp-block-button {
-  margin-top: var(--wp--style--block-gap);
-}
-.swiper-container.blog-swiper .cta-slide {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.swiper-container.blog-swiper .cta-slide p {
-  font-family: var(--wp--preset--font-family--secondary);
-  font-size: var(--wp--preset--font-size--medium);
-  font-weight: 600;
-  margin: 0;
-}
-.swiper-container.blog-swiper .swiper-controller-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin: var(--wp--style--block-gap) 0 0 3.125rem;
-  cursor: auto;
-}
-@media only screen and (max-width: 1023px) {
-  .swiper-container.blog-swiper .swiper-controller-wrap {
-    margin: var(--wp--style--block-gap) 0 0;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .swiper-container.blog-swiper .swiper-controller-wrap {
-    justify-content: center;
-  }
-}
-.swiper-container.blog-swiper .swiper-button-next,
-.swiper-container.blog-swiper .swiper-button-prev {
-  z-index: 1;
-  position: relative;
-  width: 45px;
-  height: 45px;
-  top: auto;
-  margin-top: 0;
-}
-.swiper-container.blog-swiper .swiper-button-next {
-  right: auto;
-}
-.swiper-container.blog-swiper .swiper-button-prev {
-  left: auto;
-}
-.swiper-container.blog-swiper .swiper-button-prev:after {
-  transform: rotate(180deg);
-}
-.swiper-container.blog-swiper .swiper-pagination.swiper-pagination-fraction {
-  width: 100px;
-  position: relative;
-  top: auto;
-  bottom: auto;
-  font-size: var(--wp--preset--font-size--medium);
-  font-weight: 600;
-  cursor: auto;
+
+.swiper-container.blog-swiper .swiper-slide-content {
+  padding: 40px 20px;
 }
