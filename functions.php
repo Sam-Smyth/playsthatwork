@@ -2,7 +2,8 @@
 
 // Enqueue files
 
-function enqueue_theme_scripts() {
+function enqueue_theme_scripts()
+{
 
   wp_enqueue_script('gsap', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', array(), false, true);
   wp_enqueue_script('gsap-2', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', array('gsap'), false, true);
@@ -18,7 +19,8 @@ add_action('wp_enqueue_scripts', 'enqueue_theme_scripts');
 
 // Editor styles
 
-function editor_theme_styles() {
+function editor_theme_styles()
+{
   add_editor_style('dist/styles.css');
   add_editor_style('dist/style-editor.css');
 }
@@ -191,3 +193,15 @@ function noscript_fallback()
 }
 
 add_action('wp_head', 'noscript_fallback');
+
+function limit_all_excerpts($excerpt)
+{
+  $words = explode(' ', strip_tags($excerpt));
+  if (count($words) > 20) {
+    $words = array_slice($words, 0, 30);
+    return implode(' ', $words) . ' [...]';
+  }
+  return $excerpt;
+}
+
+add_filter('get_the_excerpt', 'limit_all_excerpts', 20);
