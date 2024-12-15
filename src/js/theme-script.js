@@ -326,7 +326,7 @@ document.addEventListener("DOMContentLoaded", function () {
           .then((response) => response.text())
           .then((data) => {
             blob.insertAdjacentHTML("afterbegin", data);
-          })
+          });
 
         if (i !== blobs.length - 1) {
           // Calculate position in timeline
@@ -352,6 +352,7 @@ document.addEventListener("DOMContentLoaded", function () {
               y: 300,
               opacity: 0.5,
               duration: progressPerSection,
+              ease: "power2.in",
             },
             startProgress
           );
@@ -363,6 +364,7 @@ document.addEventListener("DOMContentLoaded", function () {
               y: 0,
               opacity: 1,
               duration: progressPerSection,
+              ease: "power2.out",
             },
             startProgress
           );
@@ -376,6 +378,37 @@ document.addEventListener("DOMContentLoaded", function () {
         animation: blobCarouselTl,
         start: "center center",
         end: "+=2000",
+      });
+    }
+
+    if (document.querySelector(".read-more")) {
+      const readMoreGroup = gsap.utils.toArray(".read-more-group");
+
+      readMoreGroup.forEach((group) => {
+        const readMoreExpand = group.querySelector(".read-more-expand");
+        const readMore = group.querySelector(".read-more");
+
+        gsap.set(readMoreExpand, { height: 0 });
+
+        let isExpanded = false;
+
+        readMore.addEventListener("click", () => {
+          const naturalHeight = readMoreExpand.scrollHeight;
+          const height = isExpanded ? 0 : naturalHeight;
+
+          gsap.to(readMoreExpand, {
+            height: height,
+            ease: "power2.inOut",
+          });
+
+          gsap.to(readMore, {
+            "--read-more-rotate": isExpanded ? 45 : 225,
+          });
+
+          readMore.textContent = isExpanded ? "Read More" : "Read Less";
+
+          isExpanded = !isExpanded;
+        });
       });
     }
 

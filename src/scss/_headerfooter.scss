@@ -7,12 +7,14 @@ header {
     z-index: 10;
   }
 
-  position: absolute;
-  z-index: 10;
-  width: 100%;
+  .home & {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
 
-  > .wp-block-group {
-    background-color: transparent !important;
+    >.wp-block-group {
+      background-color: transparent !important;
+    }
   }
 }
 

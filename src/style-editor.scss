@@ -1,17 +1,3 @@
-// .object-fit-cover {
-//   .components-resizable-box__container {
-//     width: 100% !important;
-//   }
-// }
-
-// .footer-nav {
-//   .wp-block-navigation__container {
-//     display: grid;
-//     grid-template-columns: repeat(2, minmax(80px, 1fr));
-//     flex-grow: 0 !important;
-//   }
-// }
-
 html body .fade-up {
   visibility: visible;
   transform: translateY(0);
@@ -19,4 +5,8 @@ html body .fade-up {
 
 html body .home-hero-h1 {
   visibility: visible;
+}
+
+html body .blob-container .blob {
+  color: var(--wp--preset--color--contrast) !important;
 }
