@@ -2,9 +2,9 @@
   "name": "acf/blog-slider",
   "title": "Blog slider",
   "style": [
-    "file:./blog-slider.css"
+    "file:./blog-slider.min.css"
   ],
-  "editorStyle": "file:./blog-slider-editor.css",
+  "editorStyle": "file:./blog-slider-editor.min.css",
   "category": "design",
   "icon": "slides",
   "supports": {
