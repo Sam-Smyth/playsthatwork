@@ -63,7 +63,10 @@ module.exports = (env, argv) => {
         },
       }),
       new CopyPlugin({
-        patterns: [{ from: "src/js/SplitText.min.js", to: "SplitText.min.js" }],
+        patterns: [
+          { from: "src/js/SplitText.min.js", to: "SplitText.min.js" },
+          { from: "src/js/DrawSVGPlugin.min.js", to: "DrawSVGPlugin.min.js" },
+        ],
       }),
     ],
     devtool: isProduction ? false : "inline-source-map",

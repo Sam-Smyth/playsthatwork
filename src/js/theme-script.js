@@ -412,6 +412,46 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
+    // Draw
+
+    if (document.querySelector(".people-svg")) {
+      const peopleSvg = gsap.utils.toArray(".people-svg");
+
+      peopleSvg.forEach((svg) => {
+        const orangePath = svg.querySelectorAll('path[stroke="#F4A259"]');
+        const whitePath = svg.querySelectorAll('path[stroke="#EDFCFC"]');
+
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: svg,
+              start: "top 75%",
+            },
+          })
+          .from(orangePath, {
+            drawSVG: "0%",
+            duration: 3,
+          })
+          .from(
+            whitePath,
+            {
+              opacity: 0,
+              duration: 3,
+            },
+            "<"
+          );
+      });
+
+      // gsap.from(".draw-svg", {
+      //   drawSVG: "0%",
+      //   duration: 5,
+      //   scrollTrigger: {
+      //     trigger: ".draw-svg",
+      //     start: "top 75%",
+      //   },
+      // });
+    }
+
     // Responsive matchMedia
 
     let mm = gsap.matchMedia();

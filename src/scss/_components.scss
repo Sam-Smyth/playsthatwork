@@ -260,6 +260,10 @@ div.wp-site-blocks {
     padding-right: 20px;
     cursor: pointer;
 
+    &:hover {
+      text-decoration: underline;
+    }
+
     --read-more-rotate: 45deg;
 
     &:after {
