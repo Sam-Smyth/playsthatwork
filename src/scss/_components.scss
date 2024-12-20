@@ -71,51 +71,60 @@ div.wp-site-blocks {
 
   .frm-fluent-form {
 
-    fieldset {
-      >div+* {
-        margin-top: 20px;
-      }
-    }
-
-    .ff-name-field-wrapper .ff-t-container {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .ff-el-group {
-      margin-bottom: 0;
+    .wp-block-button.is-style-outline button {
+      border-color: var(--wp--preset--color--accent);
+      border-width: 2px;
+      border-style: solid;
+      color: currentColor;
+      padding-top: 10px;
+      padding-right: 20px;
+      padding-bottom: 10px;
+      padding-left: 20px;
     }
 
     input,
     textarea {
       background-color: transparent;
-      border-radius: 10px;
+      border-radius: 0px;
       padding: 10px 20px;
       border: 2px solid var(--wp--preset--color--contrast);
       resize: none;
       font-family: var(--wp--preset--font-family--secondary);
       font-size: var(--wp--preset--font-size--small);
+      color: var(--wp--preset--color--contrast) !important;
+
+      &:focus {
+        background-color: transparent;
+        border-color: var(--wp--preset--color--accent);
+        outline: 1px solid var(--wp--preset--color--base);
+      }
 
       &::placeholder {
-        color: var(--wp--preset--color--accent) !important;
+        color: var(--wp--preset--color--contrast) !important;
+        font-size: var(--wp--preset--font-size--paragraph);
       }
     }
+  }
 
-    .ff-btn-submit {
-      border: none;
-      border-bottom: 2px solid var(--wp--preset--color--contrast);
-      padding: 0;
-      font-size: var(--wp--preset--font-size--button);
-      transition: 0.2s color, 0.2s border-bottom;
-      background-color: transparent;
-      cursor: pointer;
+  .orange-form .frm-fluent-form {
 
+    .wp-block-button.is-style-outline button {
       &:hover {
-        border-bottom: 2px solid var(--wp--preset--color--accent);
-        color: var(--wp--preset--color--accent);
+        color: var(--wp--preset--color--contrast) !important;
       }
     }
+
+    input,
+    textarea {
+      border: 2px solid var(--wp--preset--color--accent);
+      color: var(--wp--preset--color--base) !important;
+
+      &::placeholder {
+        color: var(--wp--preset--color--base) !important;
+      }
+    }
+
+
   }
 
   // Cover button dark hover

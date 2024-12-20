@@ -23,6 +23,12 @@ a:where(:not(.wp-element-button)) {
   transition: 0.2s color;
 }
 
+.wp-block-list {
+  > * + * {
+    margin-top: var(--wp--preset--spacing--flex-small);
+  }
+}
+
 // Highlight colour
 
 *::selection {
