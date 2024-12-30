@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
         track.appendChild(logo.cloneNode(true));
       });
 
-      const widthToDurationRatio = 175;
+      const widthToDurationRatio = 120;
       const duration = totalWidth / widthToDurationRatio;
 
       const anim = gsap.to(track, {
