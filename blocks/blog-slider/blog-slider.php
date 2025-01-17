@@ -30,16 +30,6 @@
         </div>
 
         <div class="swiper-slide-image">
-          <?php
-          $svg_files = [
-            0 => get_template_directory() . "/assets/decoration-1.svg",
-            1 => get_template_directory() . "/assets/decoration-2.svg",
-            2 => get_template_directory() . "/assets/decoration-3.svg",
-            3 => get_template_directory() . "/assets/decoration-4.svg",
-          ];
-          $svg_index = $index % 4;
-          echo file_get_contents($svg_files[$svg_index]);
-          ?>
         </div>
 
       </div>
