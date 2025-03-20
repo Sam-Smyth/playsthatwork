@@ -25,18 +25,18 @@
         },
         {
           "slug": "base",
-          "color": "#EDFCFC",
-          "name": "Mint Green"
+          "color": "#EEEAE7",
+          "name": "Isabelline"
         },
         {
           "slug": "contrast",
-          "color": "#31493C",
-          "name": "Brunswick Green"
+          "color": "#2D3142",
+          "name": "Gunmetal"
         },
         {
           "slug": "accent",
-          "color": "#F4A259",
-          "name": "Sandy Brown"
+          "color": "#FFD21F",
+          "name": "Jonquil"
         }
       ],
       "text": true

@@ -418,8 +418,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const peopleSvg = gsap.utils.toArray(".people-svg");
 
       peopleSvg.forEach((svg) => {
-        const orangePath = svg.querySelectorAll('path[stroke="#F4A259"]');
-        const whitePath = svg.querySelectorAll('path[stroke="#EDFCFC"]');
+        const accentPath = svg.querySelectorAll('path[stroke="var(--wp--preset--color--accent)"]');
+        const basePath = svg.querySelectorAll('path[stroke="var(--wp--preset--color--base)"]');
 
         gsap
           .timeline({
@@ -428,12 +428,12 @@ document.addEventListener("DOMContentLoaded", function () {
               start: "top 75%",
             },
           })
-          .from(orangePath, {
+          .from(accentPath, {
             drawSVG: "0%",
             duration: 3,
           })
           .from(
-            whitePath,
+            basePath,
             {
               opacity: 0,
               duration: 3,
