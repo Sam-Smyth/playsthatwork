@@ -316,6 +316,36 @@ div.wp-site-blocks {
     overflow: hidden;
   }
 
+  .steps-pin-section {
+    padding-block: clamp(4.688rem, -6.25rem + 29.167vw, 15.625rem);
+  }
+
+  .steps-content-column {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    svg {
+      overflow: visible;
+      fill: var(--wp--preset--color--contrast);
+    }
+
+    p {
+      position: absolute;
+      opacity: 0;
+      margin: 0;
+      padding: 100px;
+      color: var(--wp--preset--color--base);
+    }
+  }
+
+  .steps-container {
+    p {
+      transform-origin: left;
+    }
+  }
+
   .blog-archive {
     margin-block-start: 0;
 

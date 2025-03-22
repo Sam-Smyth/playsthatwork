@@ -54,6 +54,17 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("load", function () {
+
+    // Get computed colors
+    const baseColor = getComputedStyle(document.documentElement)
+      .getPropertyValue('--wp--preset--color--base').trim();
+    const accentColor = getComputedStyle(document.documentElement)
+      .getPropertyValue('--wp--preset--color--accent').trim();
+    const contrastColor = getComputedStyle(document.documentElement)
+      .getPropertyValue('--wp--preset--color--contrast').trim();
+    const accentAltColor = getComputedStyle(document.documentElement)
+      .getPropertyValue('--wp--preset--color--accent-alt').trim();
+
     // GSAP
 
     gsap.registerPlugin(ScrollTrigger);
@@ -321,7 +332,7 @@ document.addEventListener("DOMContentLoaded", function () {
       blobs.forEach((blob, i) => {
         fetch(
           window.location.origin +
-            "/wp-content/themes/playsthatwork/assets/how-we-do-blob.svg"
+          "/wp-content/themes/playsthatwork/assets/how-we-do-blob.svg"
         )
           .then((response) => response.text())
           .then((data) => {
@@ -409,6 +420,70 @@ document.addEventListener("DOMContentLoaded", function () {
 
           isExpanded = !isExpanded;
         });
+      });
+    }
+
+    // How We Do It Steps pin
+
+    if (document.querySelector(".steps-pin")) {
+      const stepsPinSection = document.querySelector(".steps-pin"),
+        steps = gsap.utils.toArray(".steps-container p"),
+        stepsContentColumn = document.querySelector(".steps-content-column"),
+        stepsContent = gsap.utils.toArray(".steps-content-column p");
+
+      gsap.set(stepsContent[0], { opacity: 1, zIndex: 1 });
+
+      gsap.set(steps[0], { color: accentAltColor });
+
+      const stepsTl = gsap.timeline({ defaults: { ease: "power4.inOut" } });
+
+      // Add SVG blob
+
+      fetch(
+        window.location.origin +
+        "/wp-content/themes/playsthatwork/assets/how-we-do-blob.svg"
+      )
+        .then((response) => response.text())
+        .then((data) => {
+          stepsContentColumn.insertAdjacentHTML("afterbegin", data);
+        });
+
+      // For each step, add animations for both columns simultaneously
+      steps.forEach((step, i) => {
+        // First step is already styled, so skip setting it
+        if (i > 0) {
+          const initialOpacity = Math.max(0.2, 1 - (i * 0.2)); // Min opacity of 0.2
+
+          gsap.set(step, { opacity: initialOpacity, scale: 0.6 });
+
+          // Create a label for this step
+          stepsTl.addLabel(`step${i}`);
+
+          // Hide previous content and show current content
+          stepsTl.to(stepsContent[i - 1], { opacity: 0, zIndex: 0 }, `step${i}`);
+          stepsTl.to(stepsContent[i], { opacity: 1, zIndex: 1 }, `step${i}`);
+
+          steps.forEach((innerStep, j) => {
+            const distance = Math.abs(j - i);
+            const newOpacity = Math.max(0.2, 1 - (distance * 0.2)); // Min opacity of 0.2
+
+            // Change color for active step
+            if (j === i) {
+              stepsTl.to(innerStep, { color: accentAltColor, opacity: 1, scale: 1 }, `step${i}`);
+            } else {
+              stepsTl.to(innerStep, { color: contrastColor, opacity: newOpacity, scale: 0.6 }, `step${i}`);
+            }
+          });
+        }
+      });
+
+      ScrollTrigger.create({
+        trigger: stepsPinSection,
+        animation: stepsTl,
+        pin: true,
+        start: "center center",
+        end: "+=2000",
+        scrub: 1,
       });
     }
 

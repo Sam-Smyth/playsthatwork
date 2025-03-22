@@ -37,6 +37,11 @@
           "slug": "accent",
           "color": "#FFD21F",
           "name": "Jonquil"
+        },
+        {
+          "slug": "accent-alt",
+          "color": "#931F1D",
+          "name": "Carmine"
         }
       ],
       "text": true
