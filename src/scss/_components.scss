@@ -458,4 +458,13 @@ div.wp-site-blocks {
       background-image: url(/assets/decoration-4.svg);
     }
   }
+
+  .word-flip {
+    div {
+      display: inline-flex;
+      flex-direction: column;
+      height: 0px;
+      overflow: clip;
+    }
+  }
 }

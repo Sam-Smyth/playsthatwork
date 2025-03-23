@@ -630,5 +630,55 @@ document.addEventListener("DOMContentLoaded", function () {
         },
       });
     }
+
+    // Word flip
+
+    if (document.querySelector(".word-flip")) {
+      // Clone the first word and append it to the end
+      const wordContainer = document.querySelector(".word-flip div");
+      const words = gsap.utils.toArray(".word-flip div span");
+      const firstWordClone = words[0].cloneNode(true);
+      wordContainer.appendChild(firstWordClone);
+
+      // Get the updated array of words
+      const allWords = gsap.utils.toArray(".word-flip div span");
+
+      let wordFlipTl;
+
+      // Function to update container height and animation
+      function updateWordFlip() {
+        // Update container height to match line height
+        const containerHeight = words[0].offsetHeight;
+        wordContainer.style.height = `${containerHeight}px`;
+
+        // Clear existing animation and reset position
+        if (wordFlipTl) {
+          wordFlipTl.revert();
+        }
+
+        // Create new animation
+        wordFlipTl = gsap.timeline({ repeat: -1 });
+
+        words.forEach((word, index) => {
+          wordFlipTl.to(allWords, {
+            yPercent: -100 * (index + 1),
+            delay: 1,
+          });
+        });
+
+        wordFlipTl.set(allWords, {
+          yPercent: 0
+        });
+      }
+
+      updateWordFlip();
+
+      // Add resize listener with debounce for better performance
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(updateWordFlip, 250);
+      });
+    }
   });
 });
