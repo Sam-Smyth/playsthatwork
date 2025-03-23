@@ -316,10 +316,6 @@ div.wp-site-blocks {
     overflow: hidden;
   }
 
-  .steps-pin-section {
-    padding-block: clamp(4.688rem, -6.25rem + 29.167vw, 15.625rem);
-  }
-
   .steps-content-column {
     position: relative;
     display: flex;
@@ -328,6 +324,8 @@ div.wp-site-blocks {
 
     svg {
       overflow: visible;
+      width: 100%;
+      height: 100%;
       fill: var(--wp--preset--color--contrast);
     }
 
@@ -341,6 +339,50 @@ div.wp-site-blocks {
   }
 
   .steps-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .steps-scrolling {
+    position: absolute;
+    margin-top: 0;
+    bottom: 0;
+    left: 0;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--wp--preset--color--accent-alt);
+
+    --y: -50%;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -25px;
+      transform: translateY(var(--y)) rotate(45deg);
+      border-right: 2px solid var(--wp--preset--color--accent-alt);
+      border-bottom: 2px solid var(--wp--preset--color--accent-alt);
+      width: 5px;
+      aspect-ratio: 1;
+    }
+  }
+
+  .steps-container-inner {
+    position: relative;
+    --height: 13%;
+
+    &:after {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      height: var(--height);
+      width: 5px;
+      background-color: var(--wp--preset--color--accent);
+      transform: translateX(-40px);
+    }
+
     p {
       transform-origin: left;
     }

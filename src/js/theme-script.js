@@ -426,7 +426,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // How We Do It Steps pin
 
     if (document.querySelector(".steps-pin")) {
-      const stepsPinSection = document.querySelector(".steps-pin"),
+      const stepsPinSection = document.querySelector(".steps-pin-section"),
+        stepsPin = document.querySelector(".steps-pin"),
+        stepsContainer = document.querySelector(".steps-container-inner"),
         steps = gsap.utils.toArray(".steps-container p"),
         stepsContentColumn = document.querySelector(".steps-content-column"),
         stepsContent = gsap.utils.toArray(".steps-content-column p");
@@ -435,18 +437,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
       gsap.set(steps[0], { color: accentAltColor });
 
+      // gsap.set(stepsContainer, { "--height": "20%"})
+
       const stepsTl = gsap.timeline({ defaults: { ease: "power4.inOut" } });
 
       // Add SVG blob
+      const howWeDoBlobSvg = `<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M100 44.2827C100 69.2308 87.5706 100 62.5989 100C37.6271 100 0 69.2308 0 44.2827C0 19.2308 37.6271 0 62.5989 0C87.5706 0 100 19.2308 100 44.2827Z" /></svg>`;
 
-      fetch(
-        window.location.origin +
-        "/wp-content/themes/playsthatwork/assets/how-we-do-blob.svg"
-      )
-        .then((response) => response.text())
-        .then((data) => {
-          stepsContentColumn.insertAdjacentHTML("afterbegin", data);
-        });
+      stepsContentColumn.insertAdjacentHTML("afterbegin", howWeDoBlobSvg);
+
+      stepsSvg = stepsContentColumn.querySelector("svg path");
+
+      // Store different path shapes for each step
+      const pathShapes = [
+        "M100 44.2827C100 69.2308 87.5706 100 62.5989 100C37.6271 100 0 69.2308 0 44.2827C0 19.2308 37.6271 0 62.5989 0C87.5706 0 100 19.2308 100 44.2827Z",
+        "M100 55.1625C100 80.1147 71.1368 100 46.0924 100C21.048 100 0 80.1147 0 55.1625C0 30.1147 21.048 0 46.0924 0C71.1368 0 100 30.1147 100 55.1625Z",
+        "M100 46.4088C100 71.3628 67.7323 100 42.7572 100C17.6823 100 0 71.3628 0 46.4088C0 21.3628 17.6823 0 42.7572 0C67.7323 0 100 21.3628 100 46.4088Z",
+        "M100 46.7603C100 71.7063 75.4519 100 50.5233 100C25.4995 100 0 71.7063 0 46.7603C0 21.7063 25.4995 0 50.5233 0C75.4519 0 100 21.7063 100 46.7603Z",
+        "M100 37.3641C100 62.3641 87.9902 100 62.9902 100C37.9902 100 0 62.3641 0 37.3641C0 12.3641 37.9902 0 62.9902 0C87.9902 0 100 12.3641 100 37.3641Z"
+      ];
 
       // For each step, add animations for both columns simultaneously
       steps.forEach((step, i) => {
@@ -459,15 +468,25 @@ document.addEventListener("DOMContentLoaded", function () {
           // Create a label for this step
           stepsTl.addLabel(`step${i}`);
 
+          // Animate height of container
+          stepsTl.to(stepsContainer, {
+            "--height": `${(i + 1) * 20}%`
+          }, `step${i}`);
+
           // Hide previous content and show current content
-          stepsTl.to(stepsContent[i - 1], { opacity: 0, zIndex: 0 }, `step${i}`);
-          stepsTl.to(stepsContent[i], { opacity: 1, zIndex: 1 }, `step${i}`);
+          stepsTl.to(stepsContent[i - 1], { opacity: 0, zIndex: 0, y: 100 }, `step${i}`);
+          stepsTl.to(stepsContent[i], { opacity: 1, zIndex: 1, y: 0 }, `step${i}`);
+
+          // Animate blobs
+          stepsTl.to(stepsSvg, {
+            attr: { d: pathShapes[i] }
+          }, `step${i}`);
 
           steps.forEach((innerStep, j) => {
             const distance = Math.abs(j - i);
             const newOpacity = Math.max(0.2, 1 - (distance * 0.2)); // Min opacity of 0.2
 
-            // Change color for active step
+            // Animate active step
             if (j === i) {
               stepsTl.to(innerStep, { color: accentAltColor, opacity: 1, scale: 1 }, `step${i}`);
             } else {
@@ -478,12 +497,35 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       ScrollTrigger.create({
-        trigger: stepsPinSection,
+        trigger: stepsPin,
         animation: stepsTl,
         pin: true,
         start: "center center",
         end: "+=2000",
         scrub: 1,
+      });
+
+      // Keep scrolling
+
+      const stepsScrolling = document.querySelector(".steps-scrolling"),
+        stepsScrollingTl = gsap.timeline({ repeat: -1, defaults: { ease: "power4.inOut" } });
+
+      stepsScrollingTl
+        .to(stepsScrolling, {
+          "--y": "-100%"
+        }).to(stepsScrolling, {
+          "--y": "50%"
+        }).to(stepsScrolling, {
+          "--y": "-100%"
+        }).to(stepsScrolling, {
+          "--y": "-50%"
+        })
+
+      ScrollTrigger.create({
+        trigger: stepsPinSection,
+        start: "bottom bottom",
+        onEnter: () => gsap.to(stepsScrolling, { opacity: 0 }),
+        onLeaveBack: () => gsap.to(stepsScrolling, { opacity: 1 }),
       });
     }
 
