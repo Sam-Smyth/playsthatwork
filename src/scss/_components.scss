@@ -37,24 +37,42 @@ div.wp-site-blocks {
   // Buttons
 
   .wp-block-button {
+
+    // Fill button
+
+    &.is-style-fill {
+      .wp-block-button__link.wp-element-button {
+
+        background-image:
+          radial-gradient(circle at center,
+            var(--wp--preset--color--contrast) 0%,
+            var(--wp--preset--color--contrast) var(--button-circle-stop),
+            transparent var(--button-circle-stop), );
+      }
+    }
+
+    // Outline button
+
+    &.is-style-outline {
+      .wp-block-button__link.wp-element-button {
+
+        background-image:
+          radial-gradient(circle at center,
+            var(--wp--preset--color--accent) 0%,
+            var(--wp--preset--color--accent) var(--button-circle-stop),
+            transparent var(--button-circle-stop), );
+      }
+    }
+
+    // All buttons
+
     .wp-block-button__link.wp-element-button {
       transition: color 0.2s, background-color 0.2s, border-color 0.2s;
-
-      --button-circle-stop: 0%;
-
-      background: radial-gradient(circle at center,
-          var(--wp--preset--color--accent) 0%,
-          var(--wp--preset--color--accent) var(--button-circle-stop),
-          transparent var(--button-circle-stop), );
-
       display: flex;
       gap: 5px;
       align-items: center;
 
-      // &:hover {
-      //   --button-circle-stop: 100%;
-      //   // color: var(--wp--preset--color--base);
-      // }
+      --button-circle-stop: 0%;
 
       &:after {
         content: '';
@@ -73,6 +91,7 @@ div.wp-site-blocks {
 
     .wp-block-button.is-style-outline button {
       border-color: var(--wp--preset--color--accent);
+      background-color: transparent;
       border-width: 2px;
       border-style: solid;
       color: currentColor;
