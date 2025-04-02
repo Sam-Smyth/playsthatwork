@@ -6,16 +6,6 @@ header {
     top: var(--wp-admin--admin-bar--position-offset);
     z-index: 10;
   }
-
-  .home & {
-    position: absolute;
-    z-index: 10;
-    width: 100%;
-
-    >.wp-block-group {
-      background-color: transparent !important;
-    }
-  }
 }
 
 // .header-row {
