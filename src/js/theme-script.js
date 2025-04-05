@@ -62,8 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .getPropertyValue('--wp--preset--color--accent').trim();
     const contrastColor = getComputedStyle(document.documentElement)
       .getPropertyValue('--wp--preset--color--contrast').trim();
-    const accentAltColor = getComputedStyle(document.documentElement)
-      .getPropertyValue('--wp--preset--color--accent-alt').trim();
 
     // GSAP
 
@@ -435,7 +433,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       gsap.set(stepsContent[0], { opacity: 1, zIndex: 1 });
 
-      gsap.set(steps[0], { color: accentAltColor });
+      // gsap.set(steps[0], { color: accentAltColor });
 
       // gsap.set(stepsContainer, { "--height": "20%"})
 
@@ -488,9 +486,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Animate active step
             if (j === i) {
-              stepsTl.to(innerStep, { color: accentAltColor, opacity: 1, scale: 1 }, `step${i}`);
+              stepsTl.to(innerStep, { opacity: 1, scale: 1 }, `step${i}`);
             } else {
-              stepsTl.to(innerStep, { color: contrastColor, opacity: newOpacity, scale: 0.6 }, `step${i}`);
+              stepsTl.to(innerStep, { opacity: newOpacity, scale: 0.6 }, `step${i}`);
             }
           });
         }

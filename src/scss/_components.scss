@@ -378,7 +378,6 @@ div.wp-site-blocks {
     left: 0;
     font-weight: 700;
     font-style: italic;
-    color: var(--wp--preset--color--accent-alt);
 
     --y: -50%;
 
@@ -388,8 +387,8 @@ div.wp-site-blocks {
       top: 50%;
       right: -25px;
       transform: translateY(var(--y)) rotate(45deg);
-      border-right: 2px solid var(--wp--preset--color--accent-alt);
-      border-bottom: 2px solid var(--wp--preset--color--accent-alt);
+      border-right: 2px solid var(--wp--preset--color--contrast);
+      border-bottom: 2px solid var(--wp--preset--color--contrast);
       width: 5px;
       aspect-ratio: 1;
     }
@@ -492,6 +491,12 @@ div.wp-site-blocks {
       flex-direction: column;
       height: 0px;
       overflow: clip;
+    }
+  }
+
+  .logo-wall {
+    figure {
+      width: min(250px, 100%);
     }
   }
 }

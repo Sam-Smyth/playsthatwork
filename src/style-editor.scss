@@ -10,3 +10,9 @@ html body .home-hero-h1 {
 html body .blob-container .blob {
   color: var(--wp--preset--color--contrast) !important;
 }
+
+html body .logo-wall {
+  figure {
+    width: min(250px, 100%);
+  }
+}
